@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        PERMISSIONS
+        These are crucial for the app's core functionality.
+    -->
+
+    <!-- Required for network access to stream audio files. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--
+        Required for location access. ACCESS_FINE_LOCATION is for precise GPS data.
+        maxSdkVersion is set for Android 12 (S) and higher, as they can infer coarse location
+        from the fine location permission.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--
+        **CRITICAL PERMISSION**
+        Required for Android 10 (Q) and above to receive location updates when the app
+        is not in the foreground. This is essential for the audio to trigger while walking
+        with the phone in a pocket.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <!-- Required on Android 13 (Tiramisu) and above to post notifications.
+         This is needed for the foreground service notification. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Required to run a service that is not killed when the app is closed. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EvolutionswegApp"
+        tools:targetApi="31">
+
+        <!-- The main screen of the app. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Broadcast Receiver for Geofence Events.
+            This is registered to listen for geofence entry events from the system,
+            even when the app is in the background.
+        -->
+        <receiver
+            android:name=".GeofenceBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
