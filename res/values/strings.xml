@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Evolutionsweg App</string>
+    <string name="welcome_message">
+        Welcome to the Evolution Path!\n\nThis app will guide you along the walk, automatically playing audio information when you reach specific points of interest.
+        \n\nTo make this happen, the app needs to access your device\'s location, even when it\'s running in the background or your screen is off.
+        Your location data is only used for this walk and is not stored or shared.
+        \n\nPlease grant the location permissions when prompted to begin your journey through time.
+    </string>
+</resources>
